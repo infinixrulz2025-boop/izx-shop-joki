@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZX SHOP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Arial Black', system-ui, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0f1e;
+      background-image: 
+        radial-gradient(ellipse at 20% 30%, rgba(80, 20, 120, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(20, 60, 180, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 40% 80%, rgba(180, 40, 200, 0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at 70% 20%, rgba(0, 100, 255, 0.15) 0%, transparent 35%);
+      background-blend-mode: normal, normal, screen, screen;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 25% 45%, rgba(255,240,200,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 40% 10%, rgba(200,220,255,0.8), transparent),
+        radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.2px 1.2px at 70% 30%, rgba(255,220,180,0.7), transparent),
+        radial-gradient(1px 1px at 85% 55%, rgba(200,230,255,0.8), transparent),
+        radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 45% 90%, rgba(220,240,255,0.7), transparent),
+        radial-gradient(1px 1px at 65% 15%, rgba(255,240,200,0.6), transparent),
+        radial-gradient(1px 1px at 90% 85%, rgba(200,220,255,0.7), transparent),
+        radial-gradient(1.2px 1.2px at 5% 50%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 35% 60%, rgba(200,210,255,0.6), transparent),
+        radial-gradient(1px 1px at 75% 40%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 50% 50%, rgba(255,240,200,0.8), transparent),
+        radial-gradient(1px 1px at 20% 95%, rgba(200,230,255,0.7), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.2px 1.2px at 60% 80%, rgba(220,240,255,0.6), transparent),
+        radial-gradient(1px 1px at 30% 30%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 95% 45%, rgba(200,220,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 10% 65%, rgba(255,240,200,0.7), transparent);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+    }
+
+    .shop-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: 2rem;
+      background: rgba(11, 20, 36, 0.85);
+      backdrop-filter: blur(4px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 2px #1f3a5f inset;
+      padding: 1.5rem 1.5rem 2.5rem;
+      border: 1px solid #1e3a6b;
+    }
+    .skull-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 3rem 3rem 2rem 2rem;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(60, 130, 220, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.4) 0%, transparent 50%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.05"><path d="M100 30c-25 0-45 18-45 40 0 12 6 23 15 30-5 5-8 12-8 20 0 15 12 28 28 30-6 3-12 10-12 18 0 10 8 18 18 18h12c10 0 18-8 18-18 0-8-6-15-12-18 16-2 28-15 28-30 0-8-3-15-8-20 9-7 15-18 15-30 0-22-20-40-45-40z" fill="%234a7db0"/><circle cx="80" cy="55" r="7" fill="%231a2d4a"/><circle cx="120" cy="55" r="7" fill="%231a2d4a"/><path d="M85 75c0 0 10 14 30 14s30-14 30-14" stroke="%231a2d4a" stroke-width="4" fill="none"/></svg>') repeat;
+      background-size: 180px 180px;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+    .shop-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+      position: relative;
+      gap: 1.5rem;
+    }
+    .intro-title {
+      font-size: clamp(3.5rem, 14vw, 6.5rem);
+      font-weight: 900;
+      letter-spacing: 8px;
+      text-shadow: 0 0 30px #1e6bb8, 0 0 80px #0a2a5e;
+      color: #b8d4ff;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .intro-title .highlight {
+      color: #8bb9ff;
+      text-shadow: 0 0 40px #0077ff, 0 0 100px #003c9e;
+    }
+    .intro-btn {
+      margin-top: 1rem;
+      background: transparent;
+      border: 3px solid #3a7bcb;
+      border-radius: 4rem;
+      padding: 1rem 3.5rem;
+      color: #b0d0ff;
+      font-weight: 900;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      background: rgba(15, 31, 53, 0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0, 80, 200, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-btn:hover {
+      border-color: #4a9eff;
+      box-shadow: 0 0 60px #0055dd66;
+      background: rgba(20, 50, 100, 0.5);
+      color: #e0efff;
+    }
+    .intro-btn::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 4rem;
+      background: linear-gradient(135deg, #3a7bcb, #0077ff, #3a7bcb);
+      background-size: 300% 300%;
+      z-index: -1;
+      opacity: 0.5;
+      filter: blur(4px);
+    }
+
+    .main-shop {
+      display: none;
+    }
+
+    .shop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0 1.8rem;
+      border-bottom: 2px solid #1f4a7a;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .shop-title {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #b0d0ff;
+      text-shadow: 0 0 20px #0044aa, 0 0 60px #002266;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .cart-icon {
+      background: #0f1f35;
+      border: 2px solid #1d4479;
+      border-radius: 3rem;
+      padding: 0.6rem 1.8rem;
+      color: #b0d0ff;
+      font-weight: 800;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .cart-icon:hover {
+      border-color: #3c8aff;
+      box-shadow: 0 0 30px #0055dd55;
+    }
+    .cart-badge {
+      background: #ff4444;
+      color: white;
+      border-radius: 50%;
+      padding: 0.1rem 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 900;
+      min-width: 1.8rem;
+      text-align: center;
+    }
+
+    .helper-btn {
+      background: #0f1f35;
+      border: 2px solid #1d4479;
+      border-radius: 3rem;
+      padding: 0.6rem 1.5rem;
+      color: #b0d0ff;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .helper-btn:hover {
+      border-color: #3c8aff;
+      box-shadow: 0 0 30px #0055dd55;
+    }
+    .helper-btn .helper-icon {
+      font-size: 1.3rem;
+    }
+
+    .helper-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .helper-modal.show {
+      display: flex;
+    }
+    .helper-panel {
+      background: #0b1a30;
+      border: 2px solid #1d4479;
+      border-radius: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      padding: 2rem 2rem 2.2rem;
+      box-shadow: 0 0 60px #003bb3aa;
+      color: #c2dbff;
+    }
+    .helper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #1f4a7a;
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+    .helper-close {
+      background: none;
+      border: none;
+      color: #ff6666;
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .helper-close:hover {
+      color: #ff4444;
+    }
+    .helper-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      background: #0f1f35;
+      border: 2px solid #1d4479;
+      border-radius: 2rem;
+      color: #b0d0ff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .helper-item:hover {
+      border-color: #3c8aff;
+      box-shadow: 0 0 30px #0055dd55;
+      background: #1a3a6a;
+    }
+    .helper-item .h-icon {
+      font-size: 1.8rem;
+      width: 2.2rem;
+      text-align: center;
+    }
+    .helper-item .h-label {
+      flex: 1;
+    }
+    .helper-item .h-arrow {
+      color: #3a7bcb;
+      font-size: 1.2rem;
+    }
+    .helper-item.whatsapp {
+      border-color: #25D366;
+    }
+    .helper-item.whatsapp:hover {
+      border-color: #25D366;
+      box-shadow: 0 0 30px #25D36644;
+    }
+    .helper-item.feedback {
+      border-color: #0088cc;
+    }
+    .helper-item.feedback:hover {
+      border-color: #0088cc;
+      box-shadow: 0 0 30px #0088cc44;
+    }
+    .helper-item.instagram {
+      border-color: #E4405F;
+    }
+    .helper-item.instagram:hover {
+      border-color: #E4405F;
+      box-shadow: 0 0 30px #E4405F44;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+    .product-card {
+      background: linear-gradient(145deg, #0b1a30, #04101f);
+      border-radius: 2.5rem;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      border: 2px solid #1d4479;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(20, 70, 150, 0.2);
+      color: #c2dbff;
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      position: relative;
+    }
+    .product-card:hover {
+      border-color: #3c8aff;
+      box-shadow: 0 0 40px #0055dd55, 0 8px 30px black;
+    }
+    .product-name {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #e0efff;
+      text-shadow: 0 0 16px #0066ff66;
+      padding-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .product-image {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 1.2rem;
+      margin: 0.5rem auto 0.8rem;
+      display: block;
+      border: 2px solid #1d4479;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    .product-image:hover {
+      border-color: #3c8aff;
+      box-shadow: 0 0 30px #0055dd66;
+    }
+    .btn-toggle {
+      background: #0f2645;
+      border: 1px solid #1d4479;
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      color: #b0d0ff;
+      font-weight: 700;
+      font-size: 0.7rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0.3rem 0;
+    }
+    .btn-toggle:hover {
+      background: #1a3a6a;
+      border-color: #3c8aff;
+    }
+
+    .price-popup {
+      display: none;
+      background: #0f1f35;
+      border: 2px solid #3a7bcb;
+      border-radius: 2rem;
+      padding: 1.2rem 0.8rem;
+      margin: 0.8rem 0 0.3rem;
+      box-shadow: 0 0 50px #003bb3aa;
+      text-transform: uppercase;
+    }
+    .price-popup.show {
+      display: block;
+    }
+    .price-item {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #b3d6ff;
+      padding: 0.5rem 0.3rem;
+      border-bottom: 1px solid #1e3b66;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .price-item:last-child {
+      border-bottom: none;
+    }
+    .price-item .rank-name {
+      color: #b3d6ff;
+    }
+    .price-item .rank-price {
+      color: #ffd966;
+      text-shadow: 0 0 12px #ffb80055;
+    }
+    .price-item .btn-add-rank {
+      background: #1a4a7a;
+      border: 1px solid #3a7bcb;
+      border-radius: 2rem;
+      padding: 0.2rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 0.65rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .price-item .btn-add-rank:hover {
+      background: #2a6aaa;
+      box-shadow: 0 0 20px #0055dd66;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .cart-modal.show {
+      display: flex;
+    }
+    .cart-panel {
+      background: #0b1a30;
+      border: 2px solid #1d4479;
+      border-radius: 2.5rem;
+      max-width: 650px;
+      width: 100%;
+      max-height: 95vh;
+      padding: 2rem;
+      box-shadow: 0 0 60px #003bb3aa;
+      color: #c2dbff;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #1f4a7a;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+    .cart-close {
+      background: none;
+      border: none;
+      color: #ff6666;
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .cart-close:hover {
+      color: #ff4444;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+      margin-bottom: 1rem;
+      max-height: 400px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0.5rem;
+      border-bottom: 1px solid #1a3a5a;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .cart-item-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex: 1;
+    }
+    .cart-item input[type="checkbox"] {
+      width: 1.3rem;
+      height: 1.3rem;
+      accent-color: #3a8aff;
+      cursor: pointer;
+    }
+    .cart-item .item-name {
+      color: #e0efff;
+      font-size: 0.9rem;
+    }
+    .cart-item .item-price {
+      color: #ffd966;
+      text-shadow: 0 0 10px #ffb80055;
+      font-size: 0.9rem;
+    }
+    .cart-item .item-remove {
+      background: none;
+      border: none;
+      color: #ff5555;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: 900;
+      padding: 0 0.3rem;
+    }
+    .cart-item .item-remove:hover {
+      color: #ff0000;
+    }
+    .cart-item .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cart-item .qty-btn {
+      background: #0f2645;
+      border: 2px solid #1d4479;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      color: #b0d0ff;
+      font-weight: 900;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-item .qty-btn:hover {
+      border-color: #3c8aff;
+      background: #1a3a6a;
+      box-shadow: 0 0 20px #0055dd44;
+    }
+    .cart-item .qty-btn.minus:hover {
+      border-color: #ff6666;
+      color: #ff6666;
+    }
+    .cart-item .qty-btn.plus:hover {
+      border-color: #66ff88;
+      color: #66ff88;
+    }
+    .cart-item .qty-num {
+      min-width: 2rem;
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #e0efff;
+    }
+    .cart-item .item-total {
+      color: #ffd966;
+      font-weight: 900;
+      font-size: 0.9rem;
+      min-width: 4rem;
+      text-align: right;
+    }
+    .cart-empty {
+      text-align: center;
+      color: #5a7a9a;
+      font-size: 1.2rem;
+      padding: 2rem 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .cart-footer {
+      border-top: 2px solid #1f4a7a;
+      padding-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .cart-total {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #ffd966;
+      text-shadow: 0 0 15px #ffb80055;
+    }
+    .cart-checkout {
+      background: #1a6a3a;
+      border: 2px solid #3aaa5a;
+      border-radius: 3rem;
+      padding: 0.7rem 2rem;
+      color: white;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .cart-checkout:hover {
+      background: #2a8a4a;
+      box-shadow: 0 0 40px #3aaa5a66;
+    }
+    .cart-checkout:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .checkout-step {
+      display: none;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+      padding: 1rem 0.5rem;
+      border-top: 2px dashed #1f4a7a;
+    }
+    .checkout-step.active {
+      display: flex;
+    }
+    .checkout-step label {
+      font-weight: 700;
+      color: #b3d6ff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .checkout-step input {
+      background: #0b1424;
+      border: 2px solid #1d4479;
+      border-radius: 2rem;
+      padding: 0.8rem 1.5rem;
+      color: #e0efff;
+      font-weight: 700;
+      font-size: 1rem;
+      outline: none;
+      width: 100%;
+    }
+    .checkout-step input:focus {
+      border-color: #3c8aff;
+      box-shadow: 0 0 20px #0055dd66;
+    }
+    .step-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+    .btn-step {
+      background: #0f2645;
+      border: 2px solid #1d4479;
+      border-radius: 3rem;
+      padding: 0.6rem 1.8rem;
+      color: #b0d0ff;
+      font-weight: 900;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      flex: 1 0 auto;
+    }
+    .btn-step:hover {
+      background: #1a3a6a;
+      border-color: #3c8aff;
+      box-shadow: 0 0 20px #0055dd44;
+    }
+    .btn-step.primary {
+      background: #1a6a3a;
+      border-color: #3aaa5a;
+      color: white;
+    }
+    .btn-step.primary:hover {
+      background: #2a8a4a;
+      box-shadow: 0 0 30px #3aaa5a66;
+    }
+    .qr-box {
+      background: white;
+      padding: 1.2rem;
+      border-radius: 2rem;
+      display: inline-block;
+      margin: 0.5rem 0;
+      text-align: center;
+      background: #0f1f35;
+      border: 2px solid #3a7bcb;
+    }
+    .qr-box img {
+      display: block;
+      margin: 0 auto;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 1.2rem;
+      width: 200px;
+      height: 200px;
+      image-rendering: pixelated;
+    }
+    .qr-box .qr-label {
+      color: #b3d6ff;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      border: none;
+      border-radius: 3rem;
+      padding: 0.8rem 1.8rem;
+      color: white;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 2px solid #25D366;
+      width: 100%;
+      justify-content: center;
+    }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+      border-color: #128C7E;
+      box-shadow: 0 0 30px #25D36666;
+    }
+    .footer {
+      text-align: center;
+      color: #2b5080;
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      opacity: 0.5;
+      text-transform: uppercase;
+      border-top: 1px solid #1f3a5f;
+      padding-top: 1.8rem;
+    }
+
+    .notif-btn {
+      background: #1a3a6a;
+      border: 2px solid #ffaa33;
+      border-radius: 3rem;
+      padding: 0.8rem 2rem;
+      color: #ffdd99;
+      font-weight: 900;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 0 30px #ffaa3355;
+      transition: all 0.2s;
+      margin: 1rem 0 0.5rem;
+    }
+    .notif-btn:hover {
+      background: #2a5a8a;
+      border-color: #ffbb44;
+      box-shadow: 0 0 60px #ffaa3366;
+      transform: scale(1.03);
+    }
+    .notif-btn .bell {
+      font-size: 1.6rem;
+    }
+
+    .notif-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .notif-modal.show {
+      display: flex;
+    }
+    .notif-panel {
+      background: #0b1a30;
+      border: 3px solid #ffaa33;
+      border-radius: 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 0 80px #ffaa3366;
+      color: #e0efff;
+      position: relative;
+    }
+    .notif-panel .notif-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ffaa3366;
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .notif-panel .notif-header span {
+      color: #ffcc77;
+      text-shadow: 0 0 20px #ffaa33aa;
+    }
+    .notif-close {
+      background: none;
+      border: none;
+      color: #ff6666;
+      font-size: 2.2rem;
+      cursor: pointer;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .notif-close:hover {
+      color: #ff4444;
+    }
+    .notif-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #c2dbff;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 0.2rem 0;
+    }
+    .notif-body strong {
+      color: #ffdd99;
+      font-weight: 900;
+    }
+    .notif-body .step-highlight {
+      display: block;
+      background: #0f2645;
+      padding: 0.8rem 1.2rem;
+      margin: 0.8rem 0;
+      border-left: 5px solid #ffaa33;
+      border-radius: 1.2rem;
+      font-weight: 700;
+      color: #b3d6ff;
+    }
+    .notif-footer {
+      margin-top: 1.8rem;
+      text-align: right;
+      border-top: 1px solid #1f4a7a;
+      padding-top: 1.2rem;
+    }
+    .notif-footer .btn-notif-close {
+      background: #ffaa33;
+      border: none;
+      border-radius: 3rem;
+      padding: 0.6rem 2.2rem;
+      color: #0a0f1e;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .notif-footer .btn-notif-close:hover {
+      background: #ffbb44;
+      box-shadow: 0 0 30px #ffaa3366;
+    }
+
+    @media (max-width: 600px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .shop-title { font-size: 2rem; letter-spacing: 5px; }
+      .cart-icon { font-size: 1rem; padding: 0.4rem 1rem; }
+      .helper-btn { font-size: 0.8rem; padding: 0.4rem 1rem; }
+      .cart-panel { padding: 1.2rem; max-height: 95vh; }
+      .cart-item { font-size: 0.8rem; }
+      .qr-box img { width: 160px; height: 160px; }
+      .helper-panel { padding: 1.5rem; }
+      .helper-item { font-size: 0.95rem; padding: 0.8rem 1rem; }
+      .product-image { max-width: 160px; }
+      .notif-panel { padding: 1.5rem; }
+      .notif-body { font-size: 0.95rem; }
+      .cart-item .qty-btn { width: 1.6rem; height: 1.6rem; font-size: 1rem; }
+      .cart-item .qty-num { min-width: 1.5rem; font-size: 0.9rem; }
+      .cart-item .item-total { min-width: 3rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="shop-wrapper">
+  <div class="skull-overlay"></div>
+  <div class="shop-content" id="shopContent">
+
+    <div class="intro-slide" id="introSlide">
+      <div class="intro-title">
+        WELCOME TO WEB<br>
+        <span class="highlight">IZX SHOP</span>
+      </div>
+      <button class="intro-btn" id="enterBtn">MASUK</button>
+    </div>
+
+    <div class="main-shop" id="mainShop">
+      <div class="shop-header">
+        <div class="shop-title">IZX SHOP</div>
+        <div class="header-right">
+          <button class="helper-btn" id="helperBtn">
+            <span class="helper-icon">🤖</span> HELPER CENTER
+          </button>
+          <div class="cart-icon" id="cartIcon">
+            🛒 TROLI
+            <span class="cart-badge" id="cartBadge">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <button class="notif-btn" id="notifBtn">
+          <span class="bell">🔔</span> CARA ORDER
+        </button>
+      </div>
+
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-name">JOKI GENDONG</div>
+          <img class="product-image" src="https://files.catbox.moe/own46a.png" alt="JOKI GENDONG" loading="lazy">
+          <button class="btn-toggle" data-target="popupGendong">📋 LIHAT HARGA</button>
+          <div class="price-popup" id="popupGendong">
+            <div class="price-item"><span class="rank-name">EPIC</span> <span class="rank-price">RM2.00 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="EPIC" data-price="2">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">LEGEND</span> <span class="rank-price">RM2.50 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="LEGEND" data-price="2.5">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">MYTHIC</span> <span class="rank-price">RM3.00 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="MYTHIC" data-price="3">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">HONOR</span> <span class="rank-price">RM4.00 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="HONOR" data-price="4">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">GLORY</span> <span class="rank-price">RM5.00 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="GLORY" data-price="5">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">IMMO</span> <span class="rank-price">RM6.00 🌟</span> <button class="btn-add-rank" data-product="gendong" data-rank="IMMO" data-price="6">➕ ADD</button></div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-name">JOKI RANK</div>
+          <img class="product-image" src="https://files.catbox.moe/3kr0pl.png" alt="JOKI RANK" loading="lazy">
+          <button class="btn-toggle" data-target="popupRank">📋 LIHAT HARGA</button>
+          <div class="price-popup" id="popupRank">
+            <div class="price-item"><span class="rank-name">EPIC</span> <span class="rank-price">RM1.00 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="EPIC" data-price="1">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">LEGEND</span> <span class="rank-price">RM1.50 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="LEGEND" data-price="1.5">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">MYTHIC</span> <span class="rank-price">RM2.00 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="MYTHIC" data-price="2">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">HONOR</span> <span class="rank-price">RM3.00 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="HONOR" data-price="3">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">GLORY</span> <span class="rank-price">RM4.00 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="GLORY" data-price="4">➕ ADD</button></div>
+            <div class="price-item"><span class="rank-name">IMMO</span> <span class="rank-price">RM5.00 🌟</span> <button class="btn-add-rank" data-product="rank" data-rank="IMMO" data-price="5">➕ ADD</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">IZX SHOP — ALL RANKS AVAILABLE</div>
+    </div>
+  </div>
+</div>
+
+<div class="helper-modal" id="helperModal">
+  <div class="helper-panel">
+    <div class="helper-header">
+      <span>🤖 HELPER CENTER</span>
+      <button class="helper-close" id="helperClose">✕</button>
+    </div>
+    <a class="helper-item whatsapp" href="https://wa.me/601133482726" target="_blank">
+      <span class="h-icon">💬</span>
+      <span class="h-label">WhatsApp</span>
+      <span class="h-arrow">→</span>
+    </a>
+    <a class="helper-item feedback" href="https://t.me/feedbackjokibyzx" target="_blank">
+      <span class="h-icon">📝</span>
+      <span class="h-label">Feedback</span>
+      <span class="h-arrow">→</span>
+    </a>
+    <a class="helper-item instagram" href="https://instagram.com/Jokibyizx" target="_blank">
+      <span class="h-icon">📸</span>
+      <span class="h-label">Instagram</span>
+      <span class="h-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<div class="cart-modal" id="cartModal">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <span>🛒 TROLI</span>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">TROLI KOSONG</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total" id="cartTotal">JUMLAH: RM0</div>
+      <button class="cart-checkout" id="checkoutBtn">CEKOUT</button>
+    </div>
+
+    <div class="checkout-step" id="stepDetail">
+      <label>📝 MASUKKAN NAMA</label>
+      <input type="text" id="customerName" placeholder="cth: Aiman" value="">
+      <label>📱 MASUKKAN NOMBOR</label>
+      <input type="text" id="customerPhone" placeholder="cth: 0123456789" value="">
+      <div class="step-actions">
+        <button class="btn-step primary" id="stepNextBtn">SETERUSNYA →</button>
+        <button class="btn-step" id="stepCancelBtn">BATAL</button>
+      </div>
+    </div>
+
+    <div class="checkout-step" id="stepQr">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <div class="qr-box">
+          <img src="https://files.catbox.moe/9b8e7n.jpg" alt="QR Code Bayaran" style="width:200px; height:200px; border-radius:1.2rem; background:white; padding:0.5rem; image-rendering:pixelated;">
+          <div class="qr-label">⬇ SCAN UNTUK BAYAR ⬇</div>
+        </div>
+        <div style="width:100%; display: flex; flex-direction: column; gap: 0.6rem;">
+          <button class="whatsapp-btn" id="whatsappBtn">📲 SEND RESIT TO OWNER (WHATSAPP)</button>
+          <button class="btn-step" id="resetCheckoutBtn" style="width:100%;">🔙 TUTUP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="notif-modal" id="notifModal">
+  <div class="notif-panel">
+    <div class="notif-header">
+      <span>🔔 PEMBERITAHUAN</span>
+      <button class="notif-close" id="notifClose">✕</button>
+    </div>
+    <div class="notif-body">
+      <strong>📌 CARA ORDER :</strong>
+      <div class="step-highlight">
+        <strong>1.</strong> ANDA PERLU <strong>ADD TO CART</strong> SALAH SATU JOKI / RANK YANG ANDA MAHU ...
+      </div>
+      <div class="step-highlight">
+        <strong>2.</strong> SETELAH ITU ANDA <strong>CEKOUT</strong> DAN ANDA PERLU <strong>ISI NAMA & NOMBOR</strong> BAGI OWNER TAHU KEHADIRAN NEW BUYYER ...
+      </div>
+      <div class="step-highlight">
+        <strong>3.</strong> SETELAH ITU ANDA TINGGAL PERLU <strong>SCAN QR CODE</strong> DAN BAYAR ...
+      </div>
+      <div class="step-highlight">
+        <strong>4.</strong> SELEPAS PEMBAYARAN ANDA TINGGAL PERLU TEKAN <strong>( SEND RESIT TO OWNER )</strong> DAN SEND DETAIL² ACCOUNT ANDA ...
+      </div>
+      <p style="margin-top: 1rem; font-weight: 700; color: #ffdd99; text-align: center; letter-spacing: 1px;">
+        TERIMA KASIH TELAH MEMBELI DI IZX SHOP
+      </p>
+    </div>
+    <div class="notif-footer">
+      <button class="btn-notif-close" id="notifCloseBtn">TUTUP</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const introSlide = document.getElementById('introSlide');
+    const mainShop = document.getElementById('mainShop');
+    const enterBtn = document.getElementById('enterBtn');
+
+    enterBtn.addEventListener('click', function() {
+      introSlide.style.display = 'none';
+      mainShop.style.display = 'block';
+    });
+
+    const helperBtn = document.getElementById('helperBtn');
+    const helperModal = document.getElementById('helperModal');
+    const helperClose = document.getElementById('helperClose');
+
+    helperBtn.addEventListener('click', function() {
+      helperModal.classList.toggle('show');
+    });
+
+    helperClose.addEventListener('click', function() {
+      helperModal.classList.remove('show');
+    });
+
+    helperModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        helperModal.classList.remove('show');
+      }
+    });
+
+    document.querySelectorAll('.btn-toggle').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const targetId = this.dataset.target;
+        const popup = document.getElementById(targetId);
+        if (popup) {
+          document.querySelectorAll('.price-popup.show').forEach(p => {
+            if (p !== popup) p.classList.remove('show');
+          });
+          popup.classList.toggle('show');
+        }
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.product-card')) {
+        document.querySelectorAll('.price-popup.show').forEach(p => p.classList.remove('show'));
+      }
+    });
+
+    // CART SYSTEM - with quantity
+    let cart = [];
+    const cartModal = document.getElementById('cartModal');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const cartBadge = document.getElementById('cartBadge');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartClose = document.getElementById('cartClose');
+
+    const stepDetail = document.getElementById('stepDetail');
+    const stepQr = document.getElementById('stepQr');
+    const customerNameInput = document.getElementById('customerName');
+    const customerPhoneInput = document.getElementById('customerPhone');
+    const stepNextBtn = document.getElementById('stepNextBtn');
+    const stepCancelBtn = document.getElementById('stepCancelBtn');
+    const resetCheckoutBtn = document.getElementById('resetCheckoutBtn');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+
+    // Cari item dalam cart berdasarkan product dan rank
+    function findCartItem(product, rank) {
+      return cart.find(item => item.product === product && item.rank === rank);
+    }
+
+    function getTotalItems() {
+      return cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    function updateCartUI() {
+      const totalItems = getTotalItems();
+      cartBadge.textContent = totalItems;
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<div class="cart-empty">TROLI KOSONG</div>';
+        cartTotal.textContent = 'JUMLAH: RM0';
+        checkoutBtn.disabled = true;
+        return;
+      }
+      
+      let html = '';
+      let grandTotal = 0;
+      let anyChecked = false;
+      
+      cart.forEach((item, index) => {
+        const checked = item.checked !== false ? 'checked' : '';
+        const itemTotal = item.price * item.qty;
+        if (item.checked !== false) {
+          grandTotal += itemTotal;
+          anyChecked = true;
+        }
+        
+        html += `
+          <div class="cart-item" data-index="${index}">
+            <div class="cart-item-left">
+              <input type="checkbox" class="item-check" data-index="${index}" ${checked}>
+              <span class="item-name">${item.displayName}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+              <div class="qty-controls">
+                <button class="qty-btn minus" data-index="${index}">−</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-btn plus" data-index="${index}">+</button>
+              </div>
+              <span class="item-price">RM${item.price.toFixed(2)}</span>
+              <span class="item-total">RM${itemTotal.toFixed(2)}</span>
+              <button class="item-remove" data-index="${index}">✕</button>
+            </div>
+          </div>
+        `;
+      });
+      
+      cartItems.innerHTML = html;
+      cartTotal.textContent = `JUMLAH: RM${grandTotal.toFixed(2)}`;
+      checkoutBtn.disabled = !anyChecked || totalItems === 0;
+
+      // Event listeners untuk checkbox
+      document.querySelectorAll('.item-check').forEach(cb => {
+        cb.addEventListener('change', function() {
+          const idx = parseInt(this.dataset.index);
+          if (!isNaN(idx) && cart[idx]) {
+            cart[idx].checked = this.checked;
+            updateCartUI();
+          }
+        });
+      });
+
+      // Event listeners untuk butang remove
+      document.querySelectorAll('.item-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.dataset.index);
+          if (!isNaN(idx) && cart[idx]) {
+            cart.splice(idx, 1);
+            updateCartUI();
+            if (cart.length === 0) resetCheckout();
+          }
+        });
+      });
+
+      // Event listeners untuk butang quantity
+      document.querySelectorAll('.qty-btn.minus').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.dataset.index);
+          if (!isNaN(idx) && cart[idx]) {
+            if (cart[idx].qty > 1) {
+              cart[idx].qty--;
+            } else {
+              // Jika quantity 1, remove item
+              cart.splice(idx, 1);
+            }
+            updateCartUI();
+            if (cart.length === 0) resetCheckout();
+          }
+        });
+      });
+
+      document.querySelectorAll('.qty-btn.plus').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.dataset.index);
+          if (!isNaN(idx) && cart[idx]) {
+            cart[idx].qty++;
+            updateCartUI();
+          }
+        });
+      });
+    }
+
+    function addToCart(product, rank, price) {
+      const existing = findCartItem(product, rank);
+      if (existing) {
+        existing.qty++;
+      } else {
+        const displayName = product === 'gendong' ? 'JOKI GENDONG ' + rank : 'JOKI RANK ' + rank;
+        cart.push({
+          product: product,
+          rank: rank,
+          displayName: displayName,
+          price: parseFloat(price),
+          qty: 1,
+          checked: true
+        });
+      }
+      updateCartUI();
+    }
+
+    document.querySelectorAll('.btn-add-rank').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        addToCart(this.dataset.product, this.dataset.rank, parseFloat(this.dataset.price));
+      });
+    });
+
+    function resetCheckout() {
+      stepDetail.classList.remove('active');
+      stepQr.classList.remove('active');
+      customerNameInput.value = '';
+      customerPhoneInput.value = '';
+      checkoutBtn.disabled = cart.length === 0 || getTotalItems() === 0;
+    }
+
+    function showStepDetail() {
+      resetCheckout();
+      stepDetail.classList.add('active');
+    }
+
+    checkoutBtn.addEventListener('click', function() {
+      const totalItems = getTotalItems();
+      if (totalItems === 0) return;
+      const selected = cart.filter(item => item.checked !== false);
+      if (selected.length === 0) {
+        alert('SILA PILIH ITEM UNTUK CEKOUT');
+        return;
+      }
+      showStepDetail();
+    });
+
+    stepNextBtn.addEventListener('click', function() {
+      const name = customerNameInput.value.trim();
+      const phone = customerPhoneInput.value.trim();
+      if (name === '') {
+        alert('Sila masukkan nama');
+        return;
+      }
+      if (phone === '') {
+        alert('Sila masukkan nombor');
+        return;
+      }
+      stepDetail.classList.remove('active');
+      stepQr.classList.add('active');
+    });
+
+    stepCancelBtn.addEventListener('click', function() {
+      resetCheckout();
+    });
+
+    resetCheckoutBtn.addEventListener('click', function() {
+      resetCheckout();
+    });
+
+    whatsappBtn.addEventListener('click', function() {
+      const name = customerNameInput.value.trim() || 'Pelanggan';
+      const phone = customerPhoneInput.value.trim() || '-';
+      const selected = cart.filter(item => item.checked !== false);
+      if (selected.length === 0) {
+        alert('Tiada item dipilih untuk resit.');
+        return;
+      }
+      let total = 0;
+      let itemList = selected.map(it => { 
+        const itemTotal = it.price * it.qty;
+        total += itemTotal; 
+        return it.displayName + ' x' + it.qty + ' (RM' + itemTotal.toFixed(2) + ')';
+      }).join(', ');
+      const message = `🛒 RESIT IZX SHOP 🛒\nNama: ${name}\nNo: ${phone}\nItem: ${itemList}\nJumlah: RM${total.toFixed(2)}\nTerima kasih!`;
+      const url = `https://wa.me/601133482726?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
+
+    cartIcon.addEventListener('click', function() {
+      cartModal.classList.toggle('show');
+      updateCartUI();
+      resetCheckout();
+    });
+    cartClose.addEventListener('click', function() {
+      cartModal.classList.remove('show');
+      resetCheckout();
+    });
+    cartModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        cartModal.classList.remove('show');
+        resetCheckout();
+      }
+    });
+
+    updateCartUI();
+    resetCheckout();
+
+    const observer = new MutationObserver(() => {
+      if (!cartModal.classList.contains('show')) resetCheckout();
+    });
+    observer.observe(cartModal, { attributes: true, attributeFilter: ['class'] });
+
+    const notifBtn = document.getElementById('notifBtn');
+    const notifModal = document.getElementById('notifModal');
+    const notifClose = document.getElementById('notifClose');
+    const notifCloseBtn = document.getElementById('notifCloseBtn');
+
+    function openNotif() {
+      notifModal.classList.add('show');
+    }
+    function closeNotif() {
+      notifModal.classList.remove('show');
+    }
+
+    notifBtn.addEventListener('click', openNotif);
+    notifClose.addEventListener('click', closeNotif);
+    notifCloseBtn.addEventListener('click', closeNotif);
+    notifModal.addEventListener('click', function(e) {
+      if (e.target === this) closeNotif();
+    });
+
+  })();
+</script>
+</body>
+</html>
